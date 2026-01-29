@@ -46,7 +46,7 @@ Note: The route data and costs used in this application are for demonstration an
    Download and install XAMPP for your operating system.
 
 2. Clone the Repository  
-   git clone https://github.com/yourusername/smart-route-assistance.git
+   git clone https://github.com/mgkhan47/smart-route-assistance.git
 
 3. Setup the Database  
    - Open phpMyAdmin (http://localhost/phpmyadmin)  
