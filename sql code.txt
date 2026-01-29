@@ -1,0 +1,186 @@
+-- ==========================================
+-- 1. SETUP STRUCTURE (Reset & Create)
+-- ==========================================
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS routes;
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS countries;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE countries (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE cities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    country_id INT,
+    name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (country_id) REFERENCES countries(id) ON DELETE CASCADE
+);
+
+CREATE TABLE routes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    source_city_id INT,
+    dest_city_id INT,
+    distance INT,
+    cost INT,
+    FOREIGN KEY (source_city_id) REFERENCES cities(id) ON DELETE CASCADE,
+    FOREIGN KEY (dest_city_id) REFERENCES cities(id) ON DELETE CASCADE
+);
+
+-- ==========================================
+-- 2. INSERT COUNTRIES
+-- ==========================================
+INSERT INTO countries (id, name) VALUES 
+(1, 'Pakistan'),
+(2, 'India'),
+(3, 'Turkey'),
+(4, 'Saudi Arabia'),
+(5, 'Palestine');
+
+-- ==========================================
+-- 3. INSERT CITIES
+-- ==========================================
+
+-- A. Pakistan (IDs 1-20)
+INSERT INTO cities (id, country_id, name) VALUES 
+(1, 1, 'Karachi'), (2, 1, 'Lahore'), (3, 1, 'Islamabad'), (4, 1, 'Quetta'), 
+(5, 1, 'Rawalpindi'), (6, 1, 'Faisalabad'), (7, 1, 'Multan'), (8, 1, 'Peshawar'), 
+(9, 1, 'Gujranwala'), (10, 1, 'Sialkot'), (11, 1, 'Hyderabad'), (12, 1, 'Sukkur'), 
+(13, 1, 'Swat'), (14, 1, 'Abbottabad'), (15, 1, 'Mardan'), (16, 1, 'Bahawalpur'), 
+(17, 1, 'Larkana'), (18, 1, 'Rahim Yar Khan'), (19, 1, 'Sheikhupura'), (20, 1, 'Jhelum');
+
+-- B. India (IDs 21-40)
+INSERT INTO cities (id, country_id, name) VALUES 
+(21, 2, 'Delhi'), (22, 2, 'Mumbai'), (23, 2, 'Agra'), (24, 2, 'Jaipur'), 
+(25, 2, 'Lucknow'), (26, 2, 'Kanpur'), (27, 2, 'Varanasi'), (28, 2, 'Prayagraj'), 
+(29, 2, 'Noida'), (30, 2, 'Ghaziabad'), (31, 2, 'Meerut'), (32, 2, 'Aligarh'), 
+(33, 2, 'Moradabad'), (34, 2, 'Rampur'), (35, 2, 'Saharanpur'), (36, 2, 'Muzaffarnagar'), 
+(37, 2, 'Mathura'), (38, 2, 'Ayodhya'), (39, 2, 'Gorakhpur'), (40, 2, 'Jhansi');
+
+-- C. Turkey (IDs 41-60)
+INSERT INTO cities (id, country_id, name) VALUES 
+(41, 3, 'Istanbul'), (42, 3, 'Ankara'), (43, 3, 'Izmir'), (44, 3, 'Bursa'), 
+(45, 3, 'Antalya'), (46, 3, 'Adana'), (47, 3, 'Konya'), (48, 3, 'Gaziantep'), 
+(49, 3, 'Mersin'), (50, 3, 'Kayseri'), (51, 3, 'Eskisehir'), (52, 3, 'Trabzon'), 
+(53, 3, 'Samsun'), (54, 3, 'Malatya'), (55, 3, 'Diyarbakir'), (56, 3, 'Sanliurfa'), 
+(57, 3, 'Van'), (58, 3, 'Erzurum'), (59, 3, 'Sivas'), (60, 3, 'Balikesir');
+
+-- D. Saudi Arabia (IDs 61-80)
+INSERT INTO cities (id, country_id, name) VALUES 
+(61, 4, 'Riyadh'), (62, 4, 'Jeddah'), (63, 4, 'Makkah'), (64, 4, 'Madinah'), 
+(65, 4, 'Dammam'), (66, 4, 'Khobar'), (67, 4, 'Dhahran'), (68, 4, 'Taif'), 
+(69, 4, 'Abha'), (70, 4, 'Khamis Mushait'), (71, 4, 'Jizan'), (72, 4, 'Najran'), 
+(73, 4, 'Buraidah'), (74, 4, 'Unaizah'), (75, 4, 'Hail'), (76, 4, 'Tabuk'), 
+(77, 4, 'Arar'), (78, 4, 'Sakaka'), (79, 4, 'Yanbu'), (80, 4, 'Al Jubail');
+
+-- E. Palestine (IDs 81-100)
+INSERT INTO cities (id, country_id, name) VALUES 
+(81, 5, 'Jerusalem'), (82, 5, 'Gaza'), (83, 5, 'Ramallah'), (84, 5, 'Nablus'), 
+(85, 5, 'Hebron'), (86, 5, 'Jenin'), (87, 5, 'Tulkarm'), (88, 5, 'Qalqilya'), 
+(89, 5, 'Jericho'), (90, 5, 'Bethlehem'), (91, 5, 'Khan Yunis'), (92, 5, 'Rafah'), 
+(93, 5, 'Beit Lahia'), (94, 5, 'Beit Hanoun'), (95, 5, 'Deir al-Balah'), 
+(96, 5, 'Salfit'), (97, 5, 'Tubas'), (98, 5, 'Halhul'), (99, 5, 'Yatta'), 
+(100, 5, 'Dura');
+
+-- ==========================================
+-- 4. INSERT ROUTES (Corrected IDs)
+-- ==========================================
+
+-- A. Pakistan
+INSERT INTO routes (source_city_id, dest_city_id, distance, cost) VALUES 
+(1, 2, 71, 51), (1, 4, 151, 130), (2, 3, 75, 60), (3, 4, 140, 135), 
+(3, 5, 118, 111), (5, 6, 111, 105), (6, 7, 70, 65), (7, 8, 75, 70), 
+(8, 9, 120, 115), (4, 11, 99, 92), (4, 10, 80, 75), (10, 9, 146, 140), 
+(10, 12, 97, 92), (9, 12, 138, 135), (11, 13, 211, 209), (12, 13, 101, 99), 
+(13, 14, 90, 85), (13, 15, 85, 80), (15, 16, 98, 95), (16, 17, 86, 83), 
+(15, 18, 142, 140), (18, 19, 92, 88), (19, 20, 87, 85);
+
+-- B. India (Corrected IDs)
+INSERT INTO routes (source_city_id, dest_city_id, distance, cost) VALUES 
+(21, 29, 25, 40),   -- Delhi -> Noida
+(21, 30, 30, 45),   -- Delhi -> Ghaziabad
+(21, 23, 233, 450), -- Delhi -> Agra
+(21, 24, 280, 550), -- Delhi -> Jaipur
+(21, 31, 70, 120),  -- Delhi -> Meerut
+(23, 25, 335, 600), -- Agra -> Lucknow
+(23, 40, 230, 400), -- Agra -> Jhansi
+(23, 37, 58, 100),  -- Agra -> Mathura
+(25, 26, 80, 150),  -- Lucknow -> Kanpur
+(25, 28, 200, 350), -- Lucknow -> Prayagraj
+(25, 38, 135, 250), -- Lucknow -> Ayodhya
+(26, 28, 200, 360), -- Kanpur -> Prayagraj
+(28, 27, 120, 220), -- Prayagraj -> Varanasi
+(28, 38, 170, 300), -- Prayagraj -> Ayodhya
+(38, 39, 140, 260), -- Ayodhya -> Gorakhpur
+(22, 24, 1150, 2200),-- Mumbai -> Jaipur
+(22, 40, 1000, 2000),-- Mumbai -> Jhansi
+(33, 34, 30, 50),   -- Moradabad -> Rampur
+(32, 23, 85, 140);  -- Aligarh -> Agra
+
+-- C. Turkey (Corrected IDs: Matches IDs 41-60)
+INSERT INTO routes (source_city_id, dest_city_id, distance, cost) VALUES 
+(41, 42, 450, 800),  -- Istanbul -> Ankara
+(41, 44, 155, 300),  -- Istanbul -> Bursa
+(41, 51, 300, 550),  -- Istanbul -> Eskisehir
+(44, 43, 330, 600),  -- Bursa -> Izmir
+(44, 60, 280, 500),  -- Bursa -> Balikesir
+(43, 45, 460, 850),  -- Izmir -> Antalya
+(42, 51, 235, 400),  -- Ankara -> Eskisehir
+(42, 47, 260, 450),  -- Ankara -> Konya
+(42, 50, 300, 550),  -- Ankara -> Kayseri
+(47, 45, 300, 600),  -- Konya -> Antalya
+(47, 46, 350, 650),  -- Konya -> Adana
+(46, 49, 70, 120),   -- Adana -> Mersin
+(46, 48, 220, 400),  -- Adana -> Gaziantep
+(48, 56, 140, 250),  -- Gaziantep -> Sanliurfa (Fixed ID)
+(52, 53, 325, 600),  -- Trabzon -> Samsun
+(50, 54, 340, 650),  -- Kayseri -> Malatya (Fixed ID)
+(54, 55, 240, 450),  -- Malatya -> Diyarbakir (Fixed ID)
+(55, 57, 370, 700);  -- Diyarbakir -> Van (Fixed ID)
+
+-- D. Saudi Arabia (Corrected IDs: Matches IDs 61-80)
+INSERT INTO routes (source_city_id, dest_city_id, distance, cost) VALUES 
+(61, 65, 400, 750),  -- Riyadh -> Dammam
+(61, 63, 870, 1400), -- Riyadh -> Makkah
+(61, 75, 640, 1100), -- Riyadh -> Hail (Fixed ID)
+(61, 69, 950, 1600), -- Riyadh -> Abha (Fixed ID)
+(63, 62, 80, 150),   -- Makkah -> Jeddah
+(63, 64, 450, 800),  -- Makkah -> Madinah
+(63, 68, 90, 180),   -- Makkah -> Taif
+(64, 75, 430, 750),  -- Madinah -> Hail (Fixed ID)
+(64, 79, 230, 450),  -- Madinah -> Yanbu (Fixed ID)
+(62, 79, 330, 600),  -- Jeddah -> Yanbu (Fixed ID)
+(65, 66, 20, 40),    -- Dammam -> Khobar
+(65, 67, 15, 30),    -- Dammam -> Dhahran
+(65, 80, 90, 180),   -- Dammam -> Jubail
+(69, 70, 30, 60),    -- Abha -> Khamis Mushait (Fixed ID)
+(69, 71, 200, 350),  -- Abha -> Jizan (Fixed ID)
+(69, 72, 250, 450),  -- Abha -> Najran (Fixed ID)
+(75, 73, 300, 550),  -- Hail -> Buraidah (Fixed ID)
+(73, 74, 30, 50),    -- Buraidah -> Unaizah
+(75, 78, 400, 700);  -- Hail -> Sakaka
+
+-- E. Palestine (Corrected IDs: Matches IDs 81-100)
+INSERT INTO routes (source_city_id, dest_city_id, distance, cost) VALUES 
+(81, 83, 20, 50),    -- Jerusalem -> Ramallah
+(81, 90, 10, 30),    -- Jerusalem -> Bethlehem
+(81, 89, 35, 70),    -- Jerusalem -> Jericho
+(83, 84, 50, 100),   -- Ramallah -> Nablus
+(83, 89, 40, 80),    -- Ramallah -> Jericho
+(84, 86, 30, 60),    -- Nablus -> Jenin
+(84, 87, 15, 40),    -- Nablus -> Tulkarm
+(84, 97, 20, 45),    -- Nablus -> Tubas (Fixed ID)
+(84, 96, 40, 90),    -- Nablus -> Salfit
+(87, 88, 15, 35),    -- Tulkarm -> Qalqilya
+(88, 96, 25, 55),    -- Qalqilya -> Salfit
+(90, 85, 25, 55),    -- Bethlehem -> Hebron
+(85, 98, 5, 15),     -- Hebron -> Halhul (Fixed ID)
+(85, 99, 12, 25),    -- Hebron -> Yatta (Fixed ID)
+(85, 100, 10, 20),   -- Hebron -> Dura (Fixed ID)
+(82, 95, 15, 35),    -- Gaza -> Deir al-Balah (Fixed ID)
+(95, 91, 10, 25),    -- Deir al-Balah -> Khan Yunis (Fixed ID)
+(91, 92, 10, 25),    -- Khan Yunis -> Rafah
+(82, 93, 8, 20),     -- Gaza -> Beit Lahia
+(93, 94, 5, 15);     -- Beit Lahia -> Beit Hanoun

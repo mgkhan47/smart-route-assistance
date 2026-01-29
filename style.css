@@ -1,0 +1,187 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    /* --- NEW COLORS (MATCHING YOUR IMAGE) --- */
+    
+    /* Primary: Deep Ocean Blue (Matches the water & clock details) */
+    --primary: #005F99; 
+    
+    /* Primary Dark: A darker shade for hover effects */
+    --primary-dark: #004470;
+
+    /* Background: Kept light gray for the page background if image fails */
+    --bg: #F3F4F6;
+
+    /* Card: Pure white to make the text readable against the map */
+    --card: #f5efe7;
+
+    /* Text: Dark Slate (Softer than pure black, fits vintage look) */
+    --text: #334155;
+
+    /* Border: Light gray for inputs */
+    --border: #CBD5E1;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--text);
+
+    /* --- BACKGROUND IMAGE CODE --- */
+    background-image: url('qwerty1.jpg');
+    
+    /* This makes the image cover the whole screen and stay fixed when scrolling */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.container {
+    background: var(--card);
+    width: 90%;
+    max-width: 800px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.subtitle {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    background: #F9FAFB;
+    padding: 1rem;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+button.btn-primary {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 1rem;
+}
+
+button.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Route Visualization Styling */
+#result-area {
+    margin-top: 2rem;
+    border-top: 2px dashed var(--border);
+    padding-top: 2rem;
+    display: none; /* Hidden by default */
+}
+
+.summary-card {
+    background: #EEF2FF;
+    border: 1px solid #C7D2FE;
+    color: #3730A3;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.route-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.city-node {
+    background: white;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.arrow {
+    color: #9CA3AF;
+    font-size: 1.2rem;
+}
+
+/* Loading Spinner */
+.loading {
+    text-align: center;
+    color: #6B7280;
+    display: none;
+}

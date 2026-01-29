@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Route Assistance</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Smart Route Assistance</h1>
+            <p class="subtitle">Find the shortest path or cheapest cost between cities</p>
+        </header>
+
+        <form id="route-form">
+            <div class="form-group full-width">
+                <div>
+                    <label for="country">1. Select Country</label>
+                    <select id="country">
+                        <option value="">-- Choose Country --</option>
+                        </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <label for="source">From (Source)</label>
+                    <select id="source">
+                        <option value="">-- Select Country First --</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="destination">To (Destination)</label>
+                    <select id="destination">
+                        <option value="">-- Select Country First --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="criteria" value="distance" checked>
+                    <span>Shortest Distance</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="criteria" value="cost">
+                    <span>Lowest Cost</span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary">Find Best Route</button>
+        </form>
+
+        <div class="loading">
+            <p>Calculating optimal path...</p>
+        </div>
+
+        <div id="result-area">
+            <div id="route-summary" class="summary-card">
+                </div>
+            <div id="route-viz" class="route-container">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
